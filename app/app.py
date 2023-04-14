@@ -9,7 +9,7 @@ def inicio():
     noredis=False
     try:
        server=os.environ["REDIS_SERVER"]
-       R = redis.Redis(host=server, port=6379, db=0)
+       r = redis.Redis(host=server, port=6379, db=0)
        l=r.lrange("lista",0,-1)
        lista=[x.decode('utf-8') for x in l]
     except:
