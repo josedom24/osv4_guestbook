@@ -23,7 +23,8 @@ def inicio():
 def add():
     try:
         server=os.environ["REDIS_SERVER"]
-        r = redis.Redis(host=server, port=6379, db=0)
+        passwd=os.environ["REDIS_PASSWORD"]
+        r = redis.Redis(host=server, port=6379, db=0,password=passwd)
         if request.form.get("info")!="":
             l=r.lpush("lista",request.form.get("info"))
     except:
