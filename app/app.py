@@ -7,14 +7,14 @@ app = Flask(__name__)
 @app.route('/',methods=["GET","POST"])
 def inicio():
     noredis=False
-    try:
-        server=os.environ["REDIS_SERVER"]
-        r = redis.Redis(host=server, port=6379, db=0)
-        l=r.lrange("lista",0,-1)
-        lista=[x.decode('utf-8') for x in l]
-    except:
-        noredis=True
-        lista=[]
+    #try:
+    server=os.environ["REDIS_SERVER"]
+    r = redis.Redis(host=server, port=6379, db=0)
+    l=r.lrange("lista",0,-1)
+    lista=[x.decode('utf-8') for x in l]
+    #except:
+    #    noredis=True
+    #    lista=[]
     
     return render_template("inicio.html",noredis=noredis,lista=lista)
 
@@ -29,4 +29,4 @@ def add():
         abort(404)
     return redirect("/")
 
-app.run('0.0.0.0',8080)
+app.run('0.0.0.0',8080,debug=True)
